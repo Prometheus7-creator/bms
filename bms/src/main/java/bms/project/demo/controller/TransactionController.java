@@ -10,34 +10,39 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import bms.project.demo.Entity.Transaction;
-import bms.project.demo.repository.TransactionRepository;
+import bms.project.demo.Entity.NeftTransaction;
+import bms.project.demo.Entity.RtgsTransaction;
+import bms.project.demo.repository.NeftRepository;
+import bms.project.demo.repository.RtgsRepository;
 
 @RestController
 public class TransactionController {
 	@Autowired
-	TransactionRepository tranRepository;
+	NeftRepository neftRepository;
+	
+	@Autowired
+	RtgsRepository rtgsRepository;
 
 	@GetMapping (path="/getAllTransactions")
-	public List<Transaction> getAllTransactions()
+	public List<NeftTransaction> getAllTransactions()
 	{
-		List<Transaction> tranLst=tranRepository.findAll();           //http://localhost:8080/getAllTransactions
+		List<NeftTransaction> tranLst=neftRepository.findAll();           //http://localhost:8080/getAllTransactions
 		return tranLst;
 	}
 
 	@PostMapping (path="/insertTransactions")
-	public String insertTransaction(@RequestBody Transaction tranobj)
+	public String insertTransaction(@RequestBody NeftTransaction tranobj)
 	{
 	System.out.println("Received Data : " +tranobj);
-	tranRepository.save(tranobj);
+	neftRepository.save(tranobj);
 	return "Record inserted successfuly";
 	}
 
 	@DeleteMapping (path="/deleteTransaction/{id}")
-	public String deleteTransaction(@PathVariable int id)
+	public String deleteTransaction(@PathVariable long id)
 	{
 		System.out.println("Given id is : " +id);
-	    tranRepository.deleteById(id);
+	    neftRepository.deleteById(id);
 		return "Record deleted Successfully";
 		
 	}

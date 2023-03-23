@@ -9,33 +9,33 @@ import lombok.Setter;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.Table;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-@Entity
-@Table(name="transaction")
+@MappedSuperclass
 public abstract class Transaction {
-    @Id
-    private String transactionId="101A";
-    @Column(name="transactionType")
+   
+//    private String transactionId;
+    
 	private String transactionType;
-	@Column(name="senderUserId")
+	
 	private int senderUserId;
-	@Column(name="receiverUserId")
+	
 	private int receiverUserId;
-	@Column(name="senderAccountNo")
+	
 	private int senderAccountNo;
-	@Column(name="receiverAccountNo")
+	
 	private int receiverAccountNo;
-	@Column(name="amount")
+
 	private double amount;          //amount to be transferred
-	@Column(name="transactionStatus")
+	
 	private String transactionStatus;
-	@Column(name="timestamp")
+
 	private Date timestamp;
-	@Column(name="bankId")
+
 	private String bankId;
      
 
